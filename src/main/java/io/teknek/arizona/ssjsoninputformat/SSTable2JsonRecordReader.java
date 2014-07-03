@@ -43,19 +43,19 @@ public class SSTable2JsonRecordReader extends LineRecordReader {
   @Override
   public synchronized boolean next(LongWritable arg0, Text line) throws IOException {
     boolean res = super.next(arg0, line);
-    Text newLine = new Text();
-    if (line.getLength() > 0 && line.getBytes()[line.getLength()-1]==','){
-      newLine.set( line.getBytes(),0, line.getLength()-1);
-    }
-    if (res == false){
-      return false;
-    }
     if (line.charAt(0) == '['){
       res = super.next(arg0, line);
     }
     if (line.charAt(0) == ']'){
       res = super.next(arg0, line);
     }
+    if (line.getLength() > 0 && line.getBytes()[line.getLength()-1]==','){
+      line.set( line.getBytes(),0, line.getLength()-2);
+    }
+    if (res == false){
+      return false;
+    }
+    
     return res;
   }
   
