@@ -49,8 +49,8 @@ public class SSTable2JsonRecordReader extends LineRecordReader {
     if (line.charAt(0) == ']'){
       res = super.next(arg0, line);
     }
-    if (line.getLength() > 0 && line.getBytes()[line.getLength()-1]==','){
-      line.set( line.getBytes(),0, line.getLength()-2);
+    if (line.getLength() > 0 && line.getBytes()[line.getLength()-1]==','){  
+      line.set( line.getBytes(),0, line.getLength()-1);
     }
     if (res == false){
       return false;
